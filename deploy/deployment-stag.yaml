@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: facility-ui-service
+  namespace: stag
+spec:
+  selector:
+    app: facility-ui-service
+  ports:
+    - port: 80
+      targetPort: 80
+      name: facility-ui-service
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facility-ui-service
+  namespace: stag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facility-ui-service
+  template:
+    metadata:
+      labels:
+        app: facility-ui-service
+    spec:
+      imagePullSecrets:
+        - name: pipeline-docker-registry
+      containers:
+        - name: facility-ui-service
+          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+          env:
+            - name: KAFKA_PREFIX
+              value: stag
+            - name: KAFKA_HOST
+              value: kafka.kafka
+            - name: KAFKA_PORT
+              value: "9094"
+          envFrom:
+            - secretRef:
+                name: facility-ui-stag
+                optional: false
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: facility-ui-ingress
+  namespace: stag
+spec:
+  rules:
+    - host: facility-ui.testing.116.203.237.159.xip.io
+      http:
+        paths:
+          - backend:
+              serviceName: facility-ui-service
+              servicePort: 80
+  tls:
+    - hosts:
+        - facility-ui.testing.116.203.237.159.xip.io
