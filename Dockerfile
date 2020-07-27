@@ -3,7 +3,6 @@ FROM node:12.4.0-alpine AS build
 COPY . /app
 WORKDIR /app
 
-RUN apk update && apk --no-cache add git
 RUN npm i npm@latest -g
 
 RUN npm install && npm install -g @angular/cli
