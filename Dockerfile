@@ -1,9 +1,7 @@
-FROM node:10.15-alpine AS build
+FROM node:12.4.0-alpine AS build
 
 COPY . /app
 WORKDIR /app
-
-RUN npm config set unsafe-perm true
 
 RUN apk update && apk --no-cache add git
 RUN npm i npm@latest -g
