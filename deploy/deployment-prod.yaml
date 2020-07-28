@@ -34,12 +34,8 @@ spec:
         - name: facility-ui-service
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
           env:
-            - name: KAFKA_PREFIX
-              value: prod
-            - name: KAFKA_HOST
-              value: kafka.kafka
-            - name: KAFKA_PORT
-              value: "9094"
+            - name: ENV
+              value: ""
           envFrom:
             - secretRef:
                 name: facility-ui-prod
@@ -48,7 +44,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: facility-ui-ingress
+  name: facility-ui
   namespace: prod
 spec:
   rules:
