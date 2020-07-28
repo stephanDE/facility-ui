@@ -2,12 +2,13 @@
     <div class="hero-body">
         <div class="container">
             <div class="columns is-centered">
-                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                <div class="column is-5-desktop">
                     <div [formGroup]="profileForm" class="box">
                         <div class="field">
                             <label for="" class="label">Email</label>
                             <div class="control has-icons-left">
-                                <input formControlName="userName" type="email" class="input">
+                                <input formControlName="username" type="email"
+                                    class="input">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-envelope"></i>
                                 </span>
@@ -16,14 +17,30 @@
                         <div class="field">
                             <label for="" class="label">Password</label>
                             <div class="control has-icons-left">
-                                <input formControlName="password" type="password" class="input">
+                                <input formControlName="password"
+                                    type="password" class="input">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
                         </div>
+                        <div *ngIf="error" class="field">
+                            <article class="message is-danger">
+                                <div class="message-header">
+                                    <p>Fehler beim Anmelden</p>
+                                    <button class="delete"
+                                        (click)="removeError()"
+                                        aria-label="delete"></button>
+                                </div>
+                                <div class="message-body">
+                                    Bitte überprüfe deine Logindaten.
+                                </div>
+                            </article>
+                        </div>
                         <div class="field">
-                            <button [class.is-loading]="isLoading" (click)="login()" class="button is-fullwidth is-primary">
+                            <button [class.is-loading]="isLoading"
+                                (click)="login()" class="button is-fullwidth
+                                is-primary">
                                 Login
                             </button>
                         </div>

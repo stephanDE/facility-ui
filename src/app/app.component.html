@@ -45,5 +45,15 @@
             </div>
         </div>
     </div>
+
+    <div class="navbar-end">
+        <div *ngIf="isAuthenticated" class="navbar-item">
+            <div class="buttons">
+                <a (click)="logout()" class="button is-light">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
 </nav>
 <router-outlet></router-outlet>

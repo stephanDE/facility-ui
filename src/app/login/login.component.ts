@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { EnvService } from '../env.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,28 +13,41 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   profileForm = new FormGroup({
-    userName: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl(''),
   });
 
   isLoading: boolean = false;
+  error: boolean;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private envService: EnvService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
 
   }
 
+  removeError() {
+    this.error = false;
+  }
+
   login() {
+    const {username, password} = this.profileForm.value;
     this.isLoading = true;
-    this.httpClient.post('/api/login', {
-      credentials: this.profileForm.value
+    this.httpClient.post(`${this.envService.apiUrl}/auth` , {
+      username,
+      password
     }).subscribe(res => {
-      // todo: write credentials in storage
+      this.removeError();
       this.isLoading = false;
+
+      localStorage.setItem('accessToken', (res as any).access_token);
+      this.router.navigate(['/dashboard']);
     }, err => {
+      this.error = true;
       this.isLoading = false;
     });
   }
