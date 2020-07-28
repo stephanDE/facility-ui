@@ -3,8 +3,6 @@ FROM node:12.18.2-alpine3.10 AS build
 COPY . /app
 WORKDIR /app
 
-RUN npm i npm@latest -g
-
 RUN npm install && npm install -g @angular/cli
 RUN npm run build
 
