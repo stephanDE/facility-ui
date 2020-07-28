@@ -12,5 +12,5 @@ stages:
         when:
           branch: master
           event: push
-timeout: 120
+timeout: 360
 notification: {}
