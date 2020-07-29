@@ -6,22 +6,16 @@
                     <div [formGroup]="profileForm" class="box">
                         <div class="field">
                             <label for="" class="label">Email</label>
-                            <div class="control has-icons-left">
+                            <div class="control">
                                 <input formControlName="username" type="email"
                                     class="input">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
                             </div>
                         </div>
                         <div class="field">
                             <label for="" class="label">Password</label>
-                            <div class="control has-icons-left">
+                            <div class="control">
                                 <input formControlName="password"
                                     type="password" class="input">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-lock"></i>
-                                </span>
                             </div>
                         </div>
                         <div *ngIf="error" class="field">

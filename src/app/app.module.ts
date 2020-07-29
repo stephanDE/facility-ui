@@ -4,8 +4,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { SharedModule } from './shared.module';
 import { EnvService } from './env.service';
 
@@ -31,6 +29,5 @@ import { EnvService } from './env.service';
 })
 export class AppModule { 
   constructor() {
-    library.add(fas);
   }
 }
