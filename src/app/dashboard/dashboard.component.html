@@ -1,215 +1,89 @@
 <div class="section">
     <div class="columns">
-        <aside class="column is-2">
-            <nav class="menu">
-                <p class="menu-label">
-                    General
-                </p>
-                <ul class="menu-list">
-                    <li><a class="is-active">Dashboard</a></li>
-                    <li><a>Customers</a></li>
-                </ul>
-                <p class="menu-label">
-                    Administration
-                </p>
-                <ul class="menu-list">
-                    <li><a>Team Settings</a></li>
-                    <li>
-                        <a class="">Manage Your Team</a>
-                        <ul>
-                            <li><a>Members</a></li>
-                            <li><a>Plugins</a></li>
-                            <li><a>Add a member</a></li>
-                        </ul>
-                    </li>
-                    <li><a>Invitations</a></li>
-                    <li><a>Cloud Storage Environment Settings</a></li>
-                    <li><a>Authentication</a></li>
-                </ul>
-                <p class="menu-label">
-                    Transactions
-                </p>
-                <ul class="menu-list">
-                    <li><a>Payments</a></li>
-                    <li><a>Transfers</a></li>
-                    <li><a>Balance</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="column">
-            <div class="level">
-                <div class="level-left">
-                    <div class="level-item">
-                        <div class="title">Dashboard</div>
-                    </div>
-                </div>
-                <div class="level-right">
-                    <div class="level-item">
-                        <button type="button" class="button is-small">
-                            March 8, 2017 - April 6, 2017
-                        </button>
+        <div class="column">
+            <!-- Haus -->
+            <div class="item-container">
+                <div *ngFor="let item of facilites" >
+                    <div class="box item has-click has-text-centered" [class.has-background-primary]="item._id == selectedFacility?._id" (click)="selectFacility(item)">
+                        <div class="is-size-7 has-text-grey-lighter">{{ item._id }}</div>
+                        <div>{{ item.address }}</div>
                     </div>
                 </div>
             </div>
-
-            <div class="columns is-multiline">
-                <div class="column">
-                    <div class="box">
-                        <div class="heading">Top Seller Total</div>
-                        <div class="title">56,950</div>
-                        <div class="level">
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Sales $</div>
-                                    <div class="title is-5">250,000</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Overall $</div>
-                                    <div class="title is-5">750,000</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Sales %</div>
-                                    <div class="title is-5">25%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="box">
-                        <div class="heading">Revenue / Expenses</div>
-                        <div class="title">55% / 45%</div>
-                        <div class="level">
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Rev Prod $</div>
-                                    <div class="title is-5">30%</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Rev Serv $</div>
-                                    <div class="title is-5">25%</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Exp %</div>
-                                    <div class="title is-5">45%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="box">
-                        <div class="heading">Feedback Activity</div>
-                        <div class="title">78% &uarr;</div>
-                        <div class="level">
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Positive</div>
-                                    <div class="title is-5">1560</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Negative</div>
-                                    <div class="title is-5">368</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Pos/Neg %</div>
-                                    <div class="title is-5">77% / 23%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="box">
-                        <div class="heading">Orders / Returns</div>
-                        <div class="title">75% / 25%</div>
-                        <div class="level">
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Orders $</div>
-                                    <div class="title is-5">425,000</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Returns $</div>
-                                    <div class="title is-5">106,250</div>
-                                </div>
-                            </div>
-                            <div class="level-item">
-                                <div class="">
-                                    <div class="heading">Success %</div>
-                                    <div class="title is-5">+ 28,5%</div>
-                                </div>
-                            </div>
-                        </div>
+            <hr>
+            <div [formGroup]="facilityForm" class="column">
+                <input formControlName="address" class="input house-input" type="text" placeholder="Addresse">
+                    
+                <button [class.is-loading]="facilityBtnLoading" (click)="createFacility()" class="button is-fullwidth is-primary">
+                    Haus erstellen
+                </button>
+            </div>
+        </div>
+        <div class="column">
+            <!-- Ebene -->
+            <div class="item-container">
+                <div
+                    *ngFor="let item of floors" >
+                    <div *ngIf="item.facilityId == selectedFacility?._id" class="item box has-click has-text-centered" [class.has-background-primary]="item._id == selectedFloor?._id" (click)="selectFloor(item)">
+                        <div class="is-size-7 has-text-grey-lighter">{{ item._id }}</div>
+                        <div>{{ item.floorName }}</div>
                     </div>
                 </div>
             </div>
-
-            <div class="columns is-multiline">
-                <div class="column is-6">
-                    <div class="panel">
-                        <p class="panel-heading">
-                            Expenses: Daily - $700
-                        </p>
-                        <div class="panel-block">
-                            <figure class="image is-16x9">
-                                <img src="https://placehold.it/1280x720">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-6">
-                    <div class="panel">
-                        <p class="panel-heading">
-                            Refunds: Daily - $200
-                        </p>
-                        <div class="panel-block">
-                            <figure class="image is-16x9">
-                                <img src="https://placehold.it/1280x720">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-6">
-                    <div class="panel">
-                        <p class="panel-heading">
-                            Something
-                        </p>
-                        <div class="panel-block">
-                            <figure class="image is-16x9">
-                                <img src="https://placehold.it/1280x720">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-6">
-                    <div class="panel">
-                        <p class="panel-heading">
-                            Something Else
-                        </p>
-                        <div class="panel-block">
-                            <figure class="image is-16x9">
-                                <img src="https://placehold.it/1280x720">
-                            </figure>
-                        </div>
+            <hr>
+            <div [formGroup]="floorForm" class="column">
+                <input formControlName="facilityId" class="input" type="text" placeholder="Haus Id">
+            
+                <input formControlName="floorName" class="input" type="text" placeholder="Etagen Name">
+            
+                <button [class.is-loading]="floorBtnLoading" (click)="createFloor()" class="button is-fullwidth is-primary">
+                    Etage erstellen
+                </button>
+            </div>
+        </div>
+        <div class="column">
+            <!-- Wohnung -->
+            <div class="item-container">
+                <div *ngFor="let item of flats">
+                    <div *ngIf="item.floorId == selectedFloor?._id" class="item box has-click has-text-centered"
+                        [class.has-background-primary]="item._id == selectedFlat?._id" (click)="selectFlat(item)">
+                        <div class="is-size-7 has-text-grey-lighter">{{ item._id }}</div>
+                        <div>{{ item.flatName }}</div>
                     </div>
                 </div>
             </div>
-        </main>
+            <hr>
+            <div [formGroup]="flatForm" class="column">
+                <input formControlName="floorId" class="input" type="text" placeholder="Etagen Id">
+            
+                <input formControlName="flatName" class="input" type="text" placeholder="Wohnungs Name">
+            
+                <button [class.is-loading]="flatBtnLoading" (click)="createFlat()" class="button is-fullwidth is-primary">
+                    Wohnung erstellen
+                </button>
+            </div>
+        </div>
+        <div [formGroup]="roomForm" class="column">
+            <!-- Raum -->
+            <div class="item-container">
+                <div *ngFor="let item of rooms">
+                    <div *ngIf="item.flatId == selectedFlat?._id" class="item box has-click has-text-centered"
+                        [class.has-background-primary]="item._id == selectedRoom?._id" (click)="selectRoom(item)">
+                        <div class="is-size-7 has-text-grey-lighter">{{ item._id }}</div>
+                        <div>{{ item.roomName }}</div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div [formGroup]="roomForm" class="column">
+                <input formControlName="flatId" class="input" type="text" placeholder="Wohnungs Id">
+            
+                <input formControlName="roomName" class="input" type="text" placeholder="Raum Name">
+            
+                <button [class.is-loading]="roomBtnLoading"  (click)="createRoom()" class="button is-fullwidth is-primary">
+                    Raum erstellen
+                </button>
+            </div>
+        </div>
     </div>
 </div>
