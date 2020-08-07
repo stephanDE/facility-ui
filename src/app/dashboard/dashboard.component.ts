@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.createFacility(this.facilityForm.value).subscribe(r => {
       this.facilityBtnLoading = false;
       this.loadFacilites();
-    });
+    }, r => {this.facilityBtnLoading = false});
   }
 
   createFloor() {
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.createFloor(this.floorForm.value).subscribe(r => {
       this.floorBtnLoading = false;
       this.loadFloors();
-    });
+    }, r => {this.floorBtnLoading = false});
   }
 
   createFlat() {
@@ -144,7 +144,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.createFlat(this.flatForm.value).subscribe(r => {
       this.flatBtnLoading = false;
       this.loadFlats();
-    });
+    }, r => {this.flatBtnLoading = false});
   }
 
   createRoom() {
@@ -152,6 +152,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.createRoom(this.roomForm.value).subscribe(r => {
       this.roomBtnLoading = false;
       this.loadRooms();
-    });
+    }, r => {this.roomBtnLoading = false});
   }
 }
